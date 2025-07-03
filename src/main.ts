@@ -42,17 +42,19 @@ class VectorizationDemo {
     this.updateStatus(`Vectorizing: "${text}"`);
     
     try {
+      const start = performance.now();
       // Get embeddings from the model
       const embeddings = await this.featureExtractor(text, {
         pooling: 'mean',
         normalize: true
       });
-      
+      const end = performance.now();
+      const elapsedMs = end - start;
       // Extract the numerical data
       const vector = embeddings.data;
       const vectorArray = Array.from(vector) as number[];
       
-      this.displayResults(text, vectorArray);
+      this.displayResults(text, vectorArray, elapsedMs);
       return vectorArray;
     } catch (error) {
       this.updateStatus(`Error during vectorization: ${error}`);
@@ -67,7 +69,7 @@ class VectorizationDemo {
     }
   }
 
-  displayResults(text: string, vector: number[]) {
+  displayResults(text: string, vector: number[], elapsedMs?: number) {
     const resultsElement = document.getElementById('results');
     if (!resultsElement) return;
 
@@ -79,6 +81,7 @@ class VectorizationDemo {
         <p><strong>Input Text:</strong> "${text}"</p>
         <p><strong>Vector Dimensions:</strong> ${vector.length}</p>
         <p><strong>Vector Preview (first 10 dimensions):</strong> [${vectorPreview}...]</p>
+        ${elapsedMs !== undefined ? `<p><strong>Vectorization Time:</strong> ${elapsedMs.toFixed(2)} ms</p>` : ''}
         <details>
           <summary>Full Vector (click to expand)</summary>
           <pre class="vector-display">[${vector.map(v => v.toFixed(6)).join(',\n ')}]</pre>
