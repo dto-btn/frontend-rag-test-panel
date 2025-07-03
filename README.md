@@ -24,7 +24,6 @@ A modern browser-based demo for real-time text vectorization using Hugging Face�
 ## Usage
 
 - Enter text and click “Vectorize Text” to see its embedding and speed.
-- Use the “Stress Test” button to benchmark how many vectorizations can be performed in 10 seconds.
 
 ## License
 
