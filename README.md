@@ -2,6 +2,10 @@
 
 A modern browser-based demo for real-time text vectorization using Hugging Face’s all-MiniLM-L6-v2 sentence transformer (via @huggingface/transformers and Xenova ONNX).
 
+## Live URL
+
+https://dto-btn.github.io/frontend-rag-test-panel/
+
 ## Features
 
 - Vectorize any input text in the browser—no backend required
